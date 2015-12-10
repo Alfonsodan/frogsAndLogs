@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 		// Gather componants from the player game object
 		playerAnimator = GetComponent<Animator> ();
 		playerRigidbody = GetComponent<Rigidbody> ();
+
 	}
 	
 	// Update is called once per frame
@@ -29,12 +30,22 @@ public class PlayerMovement : MonoBehaviour {
 
 	void FixedUpdate () {
 
-		// if the players movement vector doesnt = zero...
+		// if the players movement vector doesnt = zero ...
 		if (movement != Vector3.zero) {
-			// ... than play the jump animation
+
+			// ... than create a target rotation based on the movement vector ...
+			Quaternion targetRotation = Quaternion.LookRotation(movement, Vector3.up);
+
+			// ... and create another rotation that moves from current rotation to target rotation ...
+			Quaternion newRotation = Quaternion.Lerp(playerRigidbody.rotation, targetRotation, turningSpeed * Time.deltaTime);
+
+			// ...and change the players rotation to the new incremental rotation ...
+			playerRigidbody.MoveRotation(newRotation);
+
+			// ... than play the jump animation ...
 			playerAnimator.SetFloat ("Speed", 3f);
 		} else {
-			// ... otherwise dont play the jump animation
+			// ... otherwise dont play the jump animation ...
 			playerAnimator.SetFloat ("Speed", 0f);
 	}
 	}

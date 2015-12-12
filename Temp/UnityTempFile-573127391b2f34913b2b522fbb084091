@@ -77,6 +77,8 @@
 -define:UNITY_EDITOR_OSX
 -define:CROSS_PLATFORM_INPUT
 'Assets/Scripts/DontDestroy.cs'
+'Assets/Scripts/FlyMovement.cs'
+'Assets/Scripts/FlyPickup.cs'
 'Assets/Scripts/FollowCamera.cs'
 'Assets/Scripts/GameQuality.cs'
 'Assets/Scripts/PlayerMovement.cs'
